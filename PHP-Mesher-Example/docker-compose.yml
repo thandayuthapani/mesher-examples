@@ -1,0 +1,26 @@
+version:  '3'
+services:
+  php-server:
+    build: ./server
+  php-client:
+    build: ./client
+    environment:
+      http_proxy: http://127.0.0.1:30101
+    network_mode: "service:mesher-consumer"
+    depends_on:
+      - mesher-consumer
+  mesher-provider:
+    image: cse-mesher:latest
+    environment:
+      CSE_REGISTRY_ADDR: http://192.168.42.108:30100
+      SPECIFIC_ADDR: 127.0.0.1:80
+      SERVICE_NAME: "hellomesher"
+    network_mode: "service:php-server"
+    depends_on:
+      - php-server
+  mesher-consumer:
+    image: cse-mesher:latest
+    environment:
+      CSE_REGISTRY_ADDR: http://192.168.42.108:30100
+      SERVICE_NAME: "mesher-consumer"
+
