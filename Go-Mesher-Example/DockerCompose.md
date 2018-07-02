@@ -1,16 +1,9 @@
-# Go-Mesher-Example
-
-This example illustrates the mesher integration with GoLang Client and Server.
-
-
-## Getting Started
-
-### Using DockerCompose
+### Running this example using docker compose
 
 To run this example using docker compose you can execute the following commands
 
 ##### Step 1
-Clone this repo
+Clone the code
 ```
 git clone https://github.com/go-chassis/mesher-examples
 cd Go-Mesher-Example
@@ -62,84 +55,5 @@ The Service-center is running on http://localhost:30100
 The Zipkin Dashboard will be available on http://localhost:9411/zipkin/  
 The Grafana Dashboard will be available on http://localhost:3000/dashboard/db/mesher-dashboard?refresh=5s&orgId=1  
 Prometheus data is available on http://localhost:9090/graph
-
-
-### Run on a VM Infrastructure as a Process
-
-To run this example as a process on VM you need to 2 VM's to run the Provider and Consumer
-
-```
-
-|--------------VM-1---------------|                   |--------------VM-2---------------|
-|                                 |                   |                                 |
-|           Client                |                   |             Server              |
-|                                 |                   |                                 |
-|                                 |                   |                                 |
-|       Mesher Consumer           |                   |          Mesher-Provider        |
-|                                 |                   |                                 |
-|---------------------------------|                   |---------------------------------|
-```
-
-##### Step 1 (Both the VM's)
-Clone this repo
-```
-git clone https://github.com/go-chassis/mesher-examples
-cd Go-Mesher-Example
-```
-
-##### Step 2 (Both the VM's)
-Get Mesher Binary
-
-```go
-export GOPATH=$PWD
-go get github.com/go-chassis/mesher
-```
-
-##### Step 3 (VM-1 or VM-2)
-Run the Service-Center using the guide given [here](https://github.com/apache/incubator-servicecomb-service-center#quick-start) (Remember to expose the ports of Service-Centre so that is accessible from both the machine)
-
-##### Step 4 (VM-1)
-Build Client
-```go
-go get github.com/go-chassis/mesher-examples/Go-Mesher-Example/client
-```
-
-##### Step 4 (VM-1)
-Run the Mesher-Consumer using the below script
-
-```go
-./start-mesher-consumer.sh	
-
-``` 
- 
-##### Step 5 (VM-1)
-Run the client
-```go
-cd bin
-cp -r ../client/conf .
-./client
-```
-
-##### Step 6 (VM-2)
-Build Server
-```go
-go get github.com/go-chassis/mesher-examples/Go-Mesher-Example/server
-```
-
-##### Step 7 (VM-2)
-Run the Mesher-Provider using the below script
-
-```go
-./start-mesher-provider.sh	
-
-``` 
-
-##### Step 8 (VM-2)
-Run the server
-```go
-cd bin
-./server
-```
-
 
 
