@@ -84,7 +84,8 @@ To run this example as a process on VM you need to 2 VM's to run the Provider an
 Clone this repo
 ```
 git clone https://github.com/go-chassis/mesher-examples
-cd Go-Mesher-Example
+cd mesher-examples
+export WORKSPACE=$PWD
 ```
 
 ##### Step 2 (Both the VM's)
@@ -96,7 +97,10 @@ go get github.com/go-chassis/mesher
 ```
 
 ##### Step 3 (VM-1 or VM-2)
-Run the Service-Center using the guide given [here](https://github.com/apache/incubator-servicecomb-service-center#quick-start) (Remember to expose the ports of Service-Centre so that is accessible from both the machine)
+Run the Service-Center using the guide given [here](https://github.com/apache/incubator-servicecomb-service-center#quick-start) (Remember to expose the ports of Service-Centre so that is accessible from both the machine). After service-center comes up succesfully then store the service-center ip in env varibale in both the machine.
+```go
+export SERVICE_CENTER_ADDR=SCIP (http://127.0.0.1:30100)
+```
 
 ##### Step 4 (VM-1)
 Build Client

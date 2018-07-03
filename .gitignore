@@ -123,6 +123,9 @@ venv.bak/
 # IntelliJ project files
 .idea
 *.iml
+Go-Mesher-Example/client/client
+Go-Mesher-Example/server/server
+tmp/
 out
 gen
 
