@@ -32,7 +32,7 @@ func main() {
 
 	// The router is just an http.Handler, so it can be used to create a server in the usual fashion:
 	fmt.Println("Server started succesfully at 3001 port ")
-	_ = http.ListenAndServe("0.0.0.0:3001", router)
+	_ = http.ListenAndServe("127.0.0.1:3001", router)
 
 }
 

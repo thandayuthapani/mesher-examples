@@ -56,7 +56,7 @@ func main() {
 
 	// The router is just an http.Handler, so it can be used to create a server in the usual fashion:
 	fmt.Println("Client Started on 3000 port")
-	err = http.ListenAndServe("0.0.0.0:3000", router)
+	err = http.ListenAndServe("127.0.0.1:3000", router)
 	if err != nil {
 		log.Fatal(err)
 	}

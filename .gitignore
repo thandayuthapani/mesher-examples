@@ -125,6 +125,8 @@ venv.bak/
 *.iml
 Go-Mesher-Example/client/client
 Go-Mesher-Example/server/server
+Go-Mesher-Example/mesher/mesher-consumer/mesher
+Go-Mesher-Example/mesher/mesher-provider/mesher
 tmp/
 out
 gen

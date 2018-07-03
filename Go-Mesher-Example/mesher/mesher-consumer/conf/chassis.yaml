@@ -12,4 +12,4 @@ cse:
   handler:
     chain:
       Consumer:
-        outgoing: ratelimiter-consumer, bizkeeper-consumer, loadbalance
+        outgoing: router, bizkeeper-consumer, ratelimiter-consumer, loadbalance, transport
