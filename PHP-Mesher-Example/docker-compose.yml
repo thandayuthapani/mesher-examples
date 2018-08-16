@@ -10,7 +10,7 @@ services:
     depends_on:
       - mesher-consumer
   mesher-provider:
-    image: cse-mesher:latest
+    image: gochassis/mesher:latest
     environment:
       CSE_REGISTRY_ADDR: http://192.168.42.108:30100
       SPECIFIC_ADDR: 127.0.0.1:80
@@ -19,7 +19,7 @@ services:
     depends_on:
       - php-server
   mesher-consumer:
-    image: cse-mesher:latest
+    image: gochassis/mesher:latest
     environment:
       CSE_REGISTRY_ADDR: http://192.168.42.108:30100
       SERVICE_NAME: "mesher-consumer"
