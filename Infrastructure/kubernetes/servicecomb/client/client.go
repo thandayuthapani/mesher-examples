@@ -2,9 +2,11 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
+	"github.com/gorilla/mux"
 	"os"
+	"log"
+	"io/ioutil"
 )
 
 var myClient *http.Client
@@ -23,9 +25,12 @@ func init() {
 
 }
 func main() {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	r:= mux.NewRouter()
+	r.HandleFunc("/saymessage/{id}",sayMessage)
+	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		resp, err := myClient.Get(os.Getenv("TARGET"))
 		log.Println(os.Getenv("TARGET"))
+		body,err:= ioutil.ReadAll(resp.Body)
 		if err != nil {
 			w.WriteHeader(500)
 			w.Write([]byte(err.Error()))
@@ -39,8 +44,24 @@ func main() {
 		b := make([]byte, 0)
 		_, _ = resp.Body.Read(b)
 		resp.Body.Close()
-		w.Write(b)
+		w.Write(body)
 
 	})
+	http.Handle("/",r)
 	http.ListenAndServe(":9000", nil)
+}
+func sayMessage(w http.ResponseWriter, r *http.Request){
+	vars:= mux.Vars(r)
+	id := vars["id"]
+	resp, err:= myClient.Get("cse://service-mesher/saymessage"+id)
+	if err!= nil{
+		w.Write([]byte(err.Error()))
+	}
+	body, err:= ioutil.ReadAll(resp.Body)
+	if err!= nil{
+		w.Write([]byte(err.Error()))
+	}
+	fmt.Println(string(body))
+	w.Write(body)
+	//w.Write([]byte("Hello World"+id))
 }

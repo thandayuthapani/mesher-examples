@@ -11,9 +11,9 @@ spec:
       image: servicecomb/service-center:1.0.0-m1
       ports:
         - containerPort: 30100
-      resources:
-        limits:
-          cpu: "1"
+#      resources:
+#        limits:
+#          cpu: "1"
 ---
 apiVersion: v1
 kind: Service
@@ -48,11 +48,11 @@ spec:
       image: xiaoliang/server-go
       ports:
         - containerPort: 9999
-      resources:
-        limits:
-          cpu: "1"
+#      resources:
+#        limits:
+#          cpu: "1"
     - name: mesher
-      image: xiaoliang/mesher
+      image: gochassis/mesher
       args:
         - --service-ports
         - rest:9999
@@ -69,9 +69,9 @@ spec:
         - containerPort: 30101 # proxy
         - containerPort: 30102 # admin API
         - containerPort: 6060 #pprof debug port
-      resources:
-          limits:
-            cpu: "2"
+#      resources:
+#          limits:
+#            cpu: "2"
 ---
 apiVersion: v1
 kind: Service
@@ -84,13 +84,13 @@ spec:
   ports:
   - protocol: TCP
     name: mesher
-    port: 30105
-    nodePort: 30105
+    port: 30115
+    nodePort: 30115
     targetPort: 30101
   - protocol: TCP
     name: server
-    port: 30104
-    nodePort: 30104
+    port: 30114
+    nodePort: 30114
     targetPort: 9999
   type: NodePort
 
@@ -117,7 +117,7 @@ spec:
         topologyKey: kubernetes.io/hostname
   containers:
     - name: client
-      image: xiaoliang/client-go
+      image: thanda/client:latest
       env:
         - name: TARGET
           value: http://server-mesher/
@@ -125,11 +125,11 @@ spec:
           value: http://127.0.0.1:30101/
       ports:
         - containerPort: 9000
-      resources:
-        limits:
-          cpu: "0.5"
+#      resources:
+#        limits:
+#          cpu: "0.5"
     - name: mesher
-      image: xiaoliang/mesher
+      image: gochassis/mesher
       env:
         - name: SERVICE_NAME
           valueFrom:
@@ -141,9 +141,9 @@ spec:
         - containerPort: 30101
         - containerPort: 30102
         - containerPort: 6060
-      resources:
-          limits:
-            cpu: "0.5"
+#      resources:
+#          limits:
+#            cpu: "0.5"
 ---
 apiVersion: v1
 kind: Service
@@ -156,12 +156,12 @@ spec:
   ports:
   - protocol: TCP
     name: client
-    port: 30107
-    nodePort: 30107
+    port: 30117
+    nodePort: 30117
     targetPort: 9000
   - protocol: TCP
     name: client-mesher
-    port: 30106
-    nodePort: 30106
+    port: 30116
+    nodePort: 30116
     targetPort: 30101
   type: NodePort

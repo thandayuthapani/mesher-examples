@@ -1,0 +1,5 @@
+package: github.com/go-chassis/mesher-examples
+import:
+- package: github.com/gorilla/mux
+  version: v1.6.0
+  repo: https://github.com/gorilla/mux
