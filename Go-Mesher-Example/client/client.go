@@ -30,6 +30,7 @@ func main() {
 	}
 	providerName, isExsist := os.LookupEnv("PROVIDER_NAME")
 	if isExsist {
+		fmt.Println("Provider Name:" providerName);
 		destination = providerName
 	}
 	dat, _ := ioutil.ReadFile("conf/app.conf")
@@ -37,6 +38,7 @@ func main() {
 
 	providerArray := strings.Split(confArray[0], "=")
 	if providerArray[1] != "" {
+		fmt.Println("Provider Array", providerArray[1]);
 		destination = providerArray[1]
 
 	} else {
@@ -56,7 +58,7 @@ func main() {
 
 	// The router is just an http.Handler, so it can be used to create a server in the usual fashion:
 	fmt.Println("Client Started on 3000 port")
-	err = http.ListenAndServe("127.0.0.1:3000", router)
+	err = http.ListenAndServe(":3000", router)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -71,6 +73,7 @@ type ErrorHandler struct {
 func doGet(api string, w http.ResponseWriter) {
 
 	req, err := http.NewRequest(http.MethodGet, destination+api, nil)
+	fmt.Println("API + Desti", destination+api);
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
