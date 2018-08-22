@@ -20,7 +20,6 @@ services:
     image: gochassis/mesher:latest
     environment:
       CSE_REGISTRY_ADDR: http://ServiceCenter:30100
-      SPECIFIC_ADDR: 127.0.0.1:80
       SERVICE_NAME: "hellomesher"
     links:
       - ServiceCenter

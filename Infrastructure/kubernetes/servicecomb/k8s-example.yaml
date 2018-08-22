@@ -53,9 +53,9 @@ spec:
           cpu: "1"
     - name: mesher
       image: xiaoliang/mesher
-      args:
-        - --service-ports
-        - rest:9999
+#      args:
+#        - --service-ports
+#        - rest:9999
       env:
         - name: SERVICE_NAME
           valueFrom:
@@ -63,8 +63,8 @@ spec:
               fieldPath: metadata.name
         - name: CSE_REGISTRY_ADDR
           value: http://service-center.default:30100
-        - name: SERVICE_PORTS
-          value: rest:9999
+#        - name: SERVICE_PORTS
+#          value: rest:9999
       ports:
         - containerPort: 30101 # proxy
         - containerPort: 30102 # admin API
@@ -120,7 +120,7 @@ spec:
       image: xiaoliang/client-go
       env:
         - name: TARGET
-          value: http://server-mesher/
+          value: http://server-mesher:9999/
         - name: http_proxy
           value: http://127.0.0.1:30101/
       ports:
