@@ -52,7 +52,7 @@ spec:
         limits:
           cpu: "1"
     - name: mesher
-      image: xiaoliang/mesher
+      image: gochassis/mesher
 #      args:
 #        - --service-ports
 #        - rest:9999
@@ -129,7 +129,7 @@ spec:
         limits:
           cpu: "0.5"
     - name: mesher
-      image: xiaoliang/mesher
+      image: gochassis/mesher
       env:
         - name: SERVICE_NAME
           valueFrom:

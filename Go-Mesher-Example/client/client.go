@@ -30,7 +30,7 @@ func main() {
 	}
 	providerName, isExsist := os.LookupEnv("PROVIDER_NAME")
 	if isExsist {
-		fmt.Println("Provider Name:" providerName);
+		fmt.Println("Provider Name:" ,providerName);
 		destination = providerName
 	}
 	dat, _ := ioutil.ReadFile("conf/app.conf")
